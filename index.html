@@ -22,6 +22,32 @@
             text-align: center;
             padding: 10px;
         }
+        #legend {
+  background: white;
+  padding: 10px;
+  line-height: 1.5em;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
+  z-index: 1000;
+  font-size: 14px;
+}
+
+#legend h4 {
+  margin: 0 0 5px;
+}
+
+#legend span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border: 1px solid #555;
+}
+
     </style>
 </head>
 
@@ -81,6 +107,17 @@
         marker.bindPopup(`<a href="${loc.link}" target="_blank">${loc.title}</a>`);
     });
 </script>
+
+    <div id="legend">
+  <h4>Legend</h4>
+  <p><span style="background-color: red;"></span> Dust Bowl (Red)</p>
+  <p><span style="background-color: gold;"></span> Golden Threads (Yellow)</p>
+  <p><span style="background-color: black;"></span> Oil Spill (Black)</p>
+  <p><span style="background-color: blue;"></span> We the People (Blue)</p>
+
+
+</div>
+
 
 </body>
 </html>
