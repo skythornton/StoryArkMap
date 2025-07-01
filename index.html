@@ -14,21 +14,24 @@
             width: 100%;
         }
         body {
-            font-family: sans-serif;
+            font-family: sans serif;
             margin: 0;
             padding: 0;
         }
         h2 {
+            font-family: 'Lora',serif;            
             text-align: center;
             padding: 8px;
         }
         h4 {
-    text-align: center;
+        font-family: 'Lora',serif;
+            text-align: center;
     margin-top: -10px;
     color: #555;
     font-weight: normal;
 }
         #legend {
+font-family: 'Lora',serif; 
   background: white;
   padding: 10px;
   line-height: 1.5em;
@@ -43,6 +46,7 @@
 }
 
 #legend h4 {
+    font-family: 'Lora',serif;
   margin: 0 0 5px;
 }
 
@@ -58,9 +62,9 @@
 </head>
 
 <body>
-<h2>STORY ARK MAP</h2>
+<h2>INTERACTIVE STORY ARK MAP</h2>
     <p style="text-align:center; font-size:18px; color:gray;">
-    tales from Southern Africa’s climate tipping points
+    tales from Southern Africa’s climate tipping points - click on the icons to reveal the stories
 </p>
 <div id="map"></div>
     <div id="legend">
@@ -92,10 +96,6 @@
 });
 
 
-    // Add OpenStreetMap tiles
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        // attribution: 'Map data © OpenStreetMap contributors'
-    // }).addTo(map);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; OpenStreetMap & CartoDB',
