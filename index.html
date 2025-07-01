@@ -58,9 +58,9 @@
 </head>
 
 <body>
-<h2>Story Ark Map</h2>
+<h2>STORY ARK MAP</h2>
     <p style="text-align:center; font-size:18px; color:gray;">
-    Explore the stories connected to land, climate, and communities
+    tales from Southern Africa’s climate tipping points
 </p>
 <div id="map"></div>
     <div id="legend">
@@ -78,6 +78,15 @@
     // Initialize the map centered over South Africa
 
     var map = L.map('map').setView([-30.5595, 22.9375], 6);
+    const map = L.map('map', {
+  center: [-30.5595, 22.9375],
+  zoom: 6,
+  maxBounds: [
+    [-37, 10],  // Southwest corner
+    [-20, 35]   // Northeast corner
+  ],
+  maxBoundsViscosity: 0.8
+});
 
     // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
