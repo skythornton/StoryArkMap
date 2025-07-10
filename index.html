@@ -79,13 +79,18 @@ footer a:hover {
         
  #logo {
   position: fixed;
-  bottom: 10px;  /* 10px above the bottom edge */
-  right: 10px;   /* 10px from the right edge */
-  width: 120px;  /* adjust size as needed */
-  height: auto;  /* keep aspect ratio */
-  z-index: 1100; /* above header/footer and map */
-  pointer-events: none; /* optional: so clicks pass through */
-  opacity: 0.85; /* optional: slightly transparent */
+  bottom: 10px;
+  right: 10px;
+  width: 100px;
+  height: auto;
+  z-index: 1100;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+  cursor: pointer; /* shows pointer hand */
+}
+
+#logo:hover {
+  opacity: 1; /* fade in on hover */
 }
 
     </style>
@@ -107,11 +112,13 @@ footer a:hover {
   <p><span style="background-color: #759194;"></span> We, the people</p>
 </div> 
     
-    <img 
+    <a href="https://www.storyark.co.za/" target="_blank">
+  <img 
     src="logo.png" 
     alt="Logo" 
     id="logo" 
   />
+</a>
     
 <footer>
   Made by <a href="https://www.linkedin.com/in/skylathornton/" target="_blank">Skyla Thornton</a>, 
