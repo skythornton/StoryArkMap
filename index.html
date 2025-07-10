@@ -76,6 +76,17 @@ footer a {
 footer a:hover {
   color: #5F9E8F; /* soft highlight on hover */
 }
+        
+ #logo {
+  position: fixed;
+  bottom: 10px;  /* 10px above the bottom edge */
+  right: 10px;   /* 10px from the right edge */
+  width: 100px;  /* adjust size as needed */
+  height: auto;  /* keep aspect ratio */
+  z-index: 1100; /* above header/footer and map */
+  pointer-events: none; /* optional: so clicks pass through */
+  opacity: 0.85; /* optional: slightly transparent */
+}
 
     </style>
 </head>
@@ -94,7 +105,13 @@ footer a:hover {
   <p><span style="background-color: #C8A92A;"></span> Golden Threads</p>
   <p><span style="background-color: #09232A;"></span> Oil Spill</p>
   <p><span style="background-color: #759194;"></span> We, the people</p>
-</div>  
+</div> 
+    
+    <img 
+    src="logo.png" 
+    alt="Logo" 
+    id="logo" 
+  />
     
 <footer>
   Made by <a href="https://www.linkedin.com/in/skylathornton/" target="_blank">Skyla Thornton</a>, 
