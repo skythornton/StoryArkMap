@@ -144,10 +144,11 @@ footer a:hover {
 //  maxZoom: 19
 // }).addTo(map);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; OpenStreetMap & CartoDB',
-  maxZoom: 19
+   L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
+  attribution: 'Map tiles by Stamen Design',
+  maxZoom: 20
 }).addTo(map);
+
  
    function getColor(group) {
         const colors = {
