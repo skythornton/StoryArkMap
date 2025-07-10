@@ -30,6 +30,7 @@
     color: #555;
     font-weight: normal;
 }
+        
         #legend {
 font-family: 'Lora',serif; 
   background: white;
@@ -57,12 +58,13 @@ font-family: 'Lora',serif;
   margin-right: 6px;
   border: 1px solid #555;
 }
+        
         footer {
   text-align: center;
   padding: 10px;
   color: #777;
   font-size: 13px;
-  font-family: 'Lora', sans-serif;
+  font-family: 'Lora', serif;
 }
 
 footer a {
@@ -78,10 +80,12 @@ footer a:hover {
 </head>
 
 <body>
-<h2>INTERACTIVE STORY ARK MAP</h2>
+    
+<h2>Where it happened...</h2>
     <p style="text-align:center; font-size:18px; color:gray;">
-    tales from Southern Africa’s climate tipping points - click on the icons to reveal the stories
+    Interactive map: click on the icons to reveal the stories!
 </p>
+    
 <div id="map"></div>
     <div id="legend">
   <h4>Chapters</h4>
@@ -123,16 +127,11 @@ footer a:hover {
   //maxZoom: 19
 //}).addTo(map);
 
-    //L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
-  //attribution: 'Map tiles by Stamen Design',
- // maxZoom: 20
-// }).addTo(map);
-    
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; OpenStreetMap & CartoDB',
-  maxZoom: 19
+L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
+attribution: 'Map tiles by Stamen Design',
+maxZoom: 20
 }).addTo(map);
-    
+     
    function getColor(group) {
         const colors = {
             Red: '#D46A6A',       // Dust Bowl
@@ -142,7 +141,6 @@ footer a:hover {
         };
         return colors[group] || '#999'; // fallback gray
     }
-
 
     // Story locations
     const locations = [
