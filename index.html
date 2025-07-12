@@ -92,7 +92,22 @@ footer a:hover {
 #logo:hover {
   opacity: 1; /* fade in on hover */
 }
-
+        
+.custom-star-icon {
+    color: black;
+    font-size: 20px;
+    text-align: center;
+}
+        
+ .star-legend {
+    color: black;
+    font-size: 16px;
+    display: inline; /* no block or box */
+    border: none;    /* remove any border */
+    width: auto;
+    height: auto;
+}
+        
     </style>
 </head>
 
@@ -105,7 +120,7 @@ footer a:hover {
     
 <div id="map"></div>
     <div id="legend">
-<p><span style="color: orange; font-size: 16px;">★</span> On the air</p>
+<p><span class="star-legend">★</span> On the air</p>
   <h4>Chapters</h4>
   <p><span style="background-color: #D33A03;"></span> Dust Bowl</p>
   <p><span style="background-color: #FED219;"></span> Golden Threads</p>
@@ -194,7 +209,8 @@ maxZoom: 19
 
         marker.bindPopup(`<a href="${loc.link}" target="_blank">${loc.title}</a>`);
     });
-    const interviewLocations = [
+    
+    const interviews = [
     {lat: -33.933331, lon: 18.465116, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n', title: 'Cape Talk: Leonie announces the approaching launch of the project as the good ship Story Ark gets ready to hoist anchor in Cape Town and sets sail (09/09/2024)'},
     {lat: -29.219558, lon: 17.463318, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-jjc2c', title: 'Cape Talk: Leonie discusses the approaching launch of the project as the good ship Story Ark gets ready to hoist anchor in Cape Town and sets sail (28/11/2024)'},
     {lat: -31.205501, lon: 30.043255, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc', title: 'Cape Talk: Leonie talks about the inspiring story of the amaMpondo community who have been fighting extractive mining and industry on their ancestral lands on the South African Wild Coast for two decades (06/01/2025)'},
@@ -204,16 +220,16 @@ maxZoom: 19
     {lat: -31.040315, lon: 28.372592, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-rae2n', title: 'Cape Talk: Listen to Leonie speak on how South African lives depend on keeping SA’s old-growth grasslands healthy'}
 ];
     
-interviewLocations.forEach(loc => {
-    const starIcon = L.divIcon({
-        html: "&#9733;", // Unicode star
-        className: "star-icon",
-        iconSize: [20, 20]
-    });
+const interviewMarker = L.marker([interview.lat, interview.lon], {
+    icon: L.divIcon({
+        className: 'custom-star-icon',
+        html: '★',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+    })
+}).addTo(map);
 
-    const marker = L.marker([loc.lat, loc.lon], { icon: starIcon }).addTo(map);
-    marker.bindPopup(`<a href="${loc.link}" target="_blank">${loc.title}</a>`);
-});
+   
 </script>
 
 </body>
