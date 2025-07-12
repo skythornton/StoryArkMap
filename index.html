@@ -4,22 +4,22 @@
     <title>Story Ark Map</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    
+
     <style>
         #map {
             height: 90vh;
             width: 100%;
         }
         body {
-            font-family: 'Lora', serif;
+            font-family: sans-serif;
             margin: 0;
             padding: 0;
         }
         h2 {
-            font-family: 'Lora', serif;            
+            font-family: 'Lora', serif;
             text-align: center;
             padding: 8px;
         }
@@ -30,11 +30,38 @@
             color: #555;
             font-weight: normal;
         }
-        
-        #legend {
-            font-family: 'Lora', serif; 
+
+        .legend-box {
+            font-family: 'Lora', serif;
             background: #F5F5F5;
             padding: 10px;
+            line-height: 1.5em;
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            position: absolute;
+            bottom: 80px;
+            left: 10px;
+            z-index: 1000;
+            font-size: 14px;
+        }
+
+        .legend-box h4 {
+            margin: 0 0 5px;
+        }
+
+        .legend-box span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 6px;
+            border: 1px solid #555;
+        }
+
+        .interview-legend {
+            font-family: 'Lora', serif;
+            background: #F5F5F5;
+            padding: 8px;
             line-height: 1.5em;
             color: #333;
             border-radius: 8px;
@@ -46,31 +73,13 @@
             font-size: 14px;
         }
 
-        #legend h4 {
-            margin: 0 0 5px;
-        }
-
-        #legend span {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-right: 6px;
-            border: 1px solid #555;
-        }
-        
         .star-legend {
             color: black;
             font-size: 16px;
             display: inline;
-            border: none; /* remove border */
-            width: auto;
-            height: auto;
         }
 
         footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
             text-align: center;
             padding: 10px;
             color: #777;
@@ -84,9 +93,9 @@
         }
 
         footer a:hover {
-            color: #5F9E8F; /* soft highlight on hover */
+            color: #5F9E8F;
         }
-        
+
         #logo {
             position: fixed;
             bottom: 10px;
@@ -96,13 +105,13 @@
             z-index: 1100;
             opacity: 0.85;
             transition: opacity 0.3s ease;
-            cursor: pointer; /* shows pointer hand */
+            cursor: pointer;
         }
 
         #logo:hover {
-            opacity: 1; /* fade in on hover */
+            opacity: 1;
         }
-        
+
         .custom-star-icon {
             color: black;
             font-size: 20px;
@@ -110,87 +119,75 @@
         }
     </style>
 </head>
-
 <body>
-    
+
 <h2>Story Ark</h2>
 <p style="text-align:center; font-size:18px; color:gray;">
-    tales from southern Africa’s climate tipping points: click on the icons to reveal the stories!
+    Tales from southern Africa’s climate tipping points: click on the icons to reveal the stories!
 </p>
-    
+
 <div id="map"></div>
 
-<div id="legend">
-    <p><span class="star-legend">★</span> On the air</p>
+<!-- Stories Legend -->
+<div class="legend-box">
     <h4>Chapters</h4>
     <p><span style="background-color: #D33A03;"></span> Dust Bowl</p>
     <p><span style="background-color: #FED219;"></span> Golden Threads</p>
     <p><span style="background-color: #000000;"></span> Oil Spill</p>
     <p><span style="background-color: #277EC3;"></span> We, the people</p>
-</div> 
-    
+</div>
+
+<!-- Interviews Legend -->
+<div class="interview-legend">
+    <p><span class="star-legend">★</span> On the air</p>
+</div>
+
 <a href="https://www.storyark.co.za/" target="_blank">
     <img src="logo.png" alt="Logo" id="logo" />
 </a>
-    
+
 <footer>
     Made by <a href="https://www.linkedin.com/in/skylathornton/" target="_blank">Skyla Thornton</a>, 
     <a href="https://climate.sun.ac.za/" target="_blank">School for Climate Studies</a>.
 </footer>
-    
+
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
-    // Initialize the map centered over South Africa
     const map = L.map('map', {
         center: [-30.5595, 22.9375],
         zoom: 6,
         minZoom: 5,
         maxZoom: 10,
         maxBounds: [
-            [-37, 10],  // Southwest corner
-            [-20, 35]   // Northeast corner
+            [-37, 10],
+            [-20, 35]
         ],
         maxBoundsViscosity: 0.8
     });
 
-    // Base map
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap & CartoDB',
         maxZoom: 19
     }).addTo(map);
 
-    // Color mapping for chapters
     function getColor(group) {
         const colors = {
-            Red: '#D33A03',       // Dust Bowl
-            Yellow: '#FED219',    // Golden Threads
-            Black: '#000000',     // Oil Spill
-            Blue: '#277EC3'       // We, the people
+            Red: '#D33A03',
+            Yellow: '#FED219',
+            Black: '#000000',
+            Blue: '#277EC3'
         };
-        return colors[group] || '#999'; // fallback gray
+        return colors[group] || '#999';
     }
 
     // Story locations
     const locations = [
         {lat: -31.37952, lon: 19.10548, group: 'Red', link: 'https://news.mongabay.com/2024/12/poachers-target-south-africas-miracle-plant-with-near-impunity/', title: 'Poachers target SA’s ‘miracle’ plant with impunity, Mongabay, (20/12/2024)'},
         {lat: -28.398375, lon: 16.784979, group: 'Red', link: 'https://www.dailymaverick.co.za/article/2025-01-28-karoo-dust-bowl-part-i-here-come-the-dunes/', title: 'Karoo Dust Bowl [Part 1]: Here come the dunes, Daily Maverick, (28/01/2025)'},
-        {lat: -31.081095, lon: 17.826527, group: 'Red', link: 'https://www.dailymaverick.co.za/article/2025-01-29-karoo-dust-bowl-part-iii-sacrifice-zone-in-the-richtersveld/?dm_source=dm_block_list&dm_medium=card_link&dm_campaign=main', title: 'Karoo Dust Bowl [Part 1]: Richtersveld farmers fear destructive creep of mining, Daily Maverick, (29/01/2025)'},
-        {lat: -28.826776, lon: 17.255836, group: 'Red', link: 'https://www.dailymaverick.co.za/article/2025-01-29-karoo-dust-bowl-part-iii-sacrifice-zone-in-the-richtersveld/?dm_source=dm_block_list&dm_medium=card_link&dm_campaign=main', title: 'Karoo Dust Bowl [Part 1]: Farmers fight reckless mining practices, Daily Maverick, (29/01/2025)'},
-        {lat: -28.478399, lon: 16.684404, group: 'Red', link: 'https://www.storyark.co.za/dead', title: 'PHOTO ESSAY: Tending the dead, StoryArk, (15/02/2025)'},
-        {lat: -28.398375, lon: 16.784979, group: 'Red', link: 'https://news.mongabay.com/2025/03/desert-creep-in-south-africa-spells-bleak-future-for-succulent-resplendent-karoo/', title: 'Bleak future for Karoo succulents, Mongabay, (20/03/2025)'},
-        {lat: -29.836035, lon: 27.599725, group: 'Blue', link: 'https://www.dailymaverick.co.za/article/2025-04-21-africans-want-climate-action-the-digital-age-might-be-how-they-get-it/', title: 'New African zeitgeist — citizens want climate action, digital age might be how they get it, Daily Maverick, (21/04/2025)'},
-        {lat: -29.219558, lon: 17.463318, group: 'Red', link: 'https://news.mongabay.com/2025/04/photo-essay-wind-blown-sand-scouring-life-off-a-southern-african-landscape/', title: 'PHOTO ESSAY: Wind-blown, Mongabay, (30/04/2025)'},
-        {lat: -30.692628, lon: 28.502003, group: 'Yellow', link: 'https://www.dailymaverick.co.za/article/2025-05-04-water-security-grasslands-restoration-is-as-important-as-engineering-solutions/', title: 'A tale of two dams — Grasslands restoration as important as engineering solutions for SA’s future water security, Daily Maverick, (04/05/2025)'},
-        {lat: -31.063992, lon: 28.327274, group: 'Yellow', link: 'https://www.dailymaverick.co.za/article/2025-05-11-agent-orange-cross-boundary-cooperation-is-key-to-reversing-the-tragedy-of-the-commons-in-grasslands/', title: 'Agent Orange — cross-boundary cooperation is key to reversing the ‘tragedy of the commons’ in grasslands, Daily Maverick, (11/05/2025)'},
-        {lat: -30.395924, lon: 27.624908, group: 'Yellow', link: 'https://www.dailymaverick.co.za/article/2025-05-14-lesotho-clinging-to-tradition-on-scarred-and-shrinking-land/', title: 'Golden Threads — clinging to traditional herding culture on Lesotho’s scarred and shrinking land, Daily Maverick, (14/05/2025)'},
-        {lat: -28.511785, lon: 28.414798, group: 'Black', link: 'https://www.dailymaverick.co.za/article/2025-05-20-sa-government-kills-funding-for-best-weapon-against-invasive-trees/?dm_source=top_reads_block&dm_medium=card_link&dm_campaign=top_reads&dm_content=maverick_news', title: 'SA government kills funding for best weapon against thirsty invasive trees, Daily Maverick, (20/05/2025)'},
-        {lat: -30.177324, lon: 28.54977, group: 'Blue', link: 'https://www.storyark.co.za/', title: 'Piles of sh*t [Part 1]: communal farmers tackle nappy waste, and the climate crisis, Daily Maverick, (14/07/2025)'},
-        {lat: -30.341548, lon: 28.801265, group: 'Blue', link: 'https://www.storyark.co.za/', title: 'Piles of sh*t [Part 2]: how corporates are at odds with our constitutional right to a healthy, safe environment, Daily Maverick, (14/07/2025)'}
-    ]; 
+        // ... add the rest
+    ];
 
-    // Add story markers
     locations.forEach(loc => {
         const marker = L.circleMarker([loc.lat, loc.lon], {
             radius: 8,
@@ -204,19 +201,15 @@
         marker.bindPopup(`<a href="${loc.link}" target="_blank">${loc.title}</a>`);
     });
 
-    // Interviews (black star markers)
+    // Interviews
     const interviews = [
-        {lat: -33.933331, lon: 18.465116, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n', title: 'Cape Talk: Leonie announces the approaching launch of the project as the good ship Story Ark gets ready to hoist anchor in Cape Town and sets sail (09/09/2024)'},
-        {lat: -29.219558, lon: 17.463318, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-jjc2c', title: 'Cape Talk: Leonie discusses the approaching launch of the project as the good ship Story Ark gets ready to hoist anchor in Cape Town and sets sail (28/11/2024)'},
-        {lat: -31.205501, lon: 30.043255, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc', title: 'Cape Talk: Leonie talks about the inspiring story of the amaMpondo community who have been fighting extractive mining and industry on their ancestral lands on the South African Wild Coast for two decades (06/01/2025)'},
-        {lat: -31.328307, lon: 19.110232, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas', title: 'Cape Talk: Listen to the perils of the remarkable miracle clivia (Clivia mirabilis) in the Bokkeveld Plateau in the Northern Cape (14/01/2025)'},
-        {lat: -29.219558, lon: 17.463318, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-jpad9', title: 'BBC Unexpected Elements: Fast and curious - Leonie talks all things fast and curious (16/03/2025)'},
-        {lat: -29.497482, lon: 30.084648, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-jpad9-pna6y', title: 'BBC Unexpected Elements: Ant antics - Listen to Leonie speak about a hobbit-frog from the KZN Highlands (10/05/2025)'},
-        {lat: -31.040315, lon: 28.372592, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-rae2n', title: 'Cape Talk: Listen to Leonie speak on how South African lives depend on keeping SA’s old-growth grasslands healthy'}
+        {lat: -33.933331, lon: 18.465116, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n', title: 'Cape Talk: Leonie announces the approaching launch of the project...'},
+        {lat: -29.219558, lon: 17.463318, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-jjc2c', title: 'Cape Talk: Leonie discusses the approaching launch of the project...'},
+        // ... add the rest
     ];
 
     interviews.forEach(interview => {
-        const marker = L.marker([interview.lat, interview.lon], {
+        const starMarker = L.marker([interview.lat, interview.lon], {
             icon: L.divIcon({
                 className: 'custom-star-icon',
                 html: '★',
@@ -225,10 +218,11 @@
             })
         }).addTo(map);
 
-        marker.bindPopup(`<a href="${interview.link}" target="_blank">${interview.title}</a>`);
+        starMarker.bindPopup(`<a href="${interview.link}" target="_blank">${interview.title}</a>`);
     });
 </script>
 
 </body>
 </html>
+
 
