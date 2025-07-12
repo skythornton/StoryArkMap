@@ -194,20 +194,20 @@ maxZoom: 19
         marker.bindPopup(`<a href="${loc.link}" target="_blank">${loc.title}</a>`);
     });
     const interviewLocations = [
-    {lat: -33.933331, lon: 18.465116, link: "https://www.storyark.co.za/inthepress/blog-post-title-one-es56n", title: "Cape Talk: Leonie announces the approaching launch of the project"},
-    {lat: -29.219558, lon: 17.463318, link: "https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-jjc2c", title: "Clarence Ford: tales from the Richtersveld"},
-    {lat: -31.205501, lon: 30.043255, link: "https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc", title: "Clarence Ford: amaMpondo activism"},
-    {lat: -31.328307, lon: 19.110232, link: "https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas", title: "Clarence Ford: poaching and the 'punk' lily"},
-    {lat: -29.219558, lon: 17.463318, link: "https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-jpad9", title: "BBC Unexpected Elements: Fast and curious"},
-    {lat: -29.497482, lon: 30.084648, link: "https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-jpad9-pna6y", title: "BBC Unexpected Elements: Ant antics"},
-    {lat: -31.040315, lon: 28.372592, link: "https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-rae2n", title: "Clarence Ford: working together to restore old-growth grasslands"}
+    {lat: -33.933331, lon: 18.465116, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n', title: 'Cape Talk: Leonie announces the approaching launch of the project as the good ship Story Ark gets ready to hoist anchor in Cape Town and sets sail (09/09/2024)'},
+    {lat: -29.219558, lon: 17.463318, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-jjc2c', title: 'Cape Talk: Leonie discusses the approaching launch of the project as the good ship Story Ark gets ready to hoist anchor in Cape Town and sets sail (28/11/2024)'},
+    {lat: -31.205501, lon: 30.043255, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc', title: 'Cape Talk: Leonie talks about the inspiring story of the amaMpondo community who have been fighting extractive mining and industry on their ancestral lands on the South African Wild Coast for two decades (06/01/2025)'},
+    {lat: -31.328307, lon: 19.110232, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas', title: 'Cape Talk: Listen to the perils of the remarkable miracle clivia (Clivia mirabilis) in the Bokkeveld Plateau in the Northern Cape (14/01/2025)'},
+    {lat: -29.219558, lon: 17.463318, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-jpad9', title: 'BBC Unexpected Elements: Fast and curious - Leonie talks all things fast and curious (16/03/2025)'},
+    {lat: -29.497482, lon: 30.084648, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-jpad9-pna6y', title: 'BBC Unexpected Elements: Ant antics - Listen to Leonie speak about a hobbit-frog from the KZN Highlands (10/05/2025)'},
+    {lat: -31.040315, lon: 28.372592, link: 'https://www.storyark.co.za/inthepress/blog-post-title-one-es56n-l9wrc-sdhas-rae2n', title: 'Cape Talk: Listen to Leonie speak on how South African lives depend on keeping SA’s old-growth grasslands healthy'}
 ];
     
 interviewLocations.forEach(loc => {
     const starIcon = L.divIcon({
         html: "&#9733;", // Unicode star
         className: "star-icon",
-        iconSize: [20, 20]
+        iconSize: [30, 30]
     });
 
     const marker = L.marker([loc.lat, loc.lon], { icon: starIcon }).addTo(map);
