@@ -166,19 +166,25 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // Initialize the map centered over South Africa
+    
     const map = L.map('map', {
-        center: [-30.5595, 22.9375],
-        zoom: 6,
-        minZoom: 5,
-        maxZoom: 10,
-        maxBounds: [
-            [-37, 10],  // Southwest corner
-            [-20, 35]   // Northeast corner
-        ],
-        maxBoundsViscosity: 0.8
-    });
+    center: [-30.5595, 22.9375],
+    zoom: 6,
+    minZoom: 5,
+    maxZoom: 10,
+    maxBounds: [
+        [-37, 10],
+        [-20, 35]
+    ],
+    maxBoundsViscosity: 0.8,
+    zoomControl: false // turn off default
+});
 
+// Add custom zoom control on top right
+L.control.zoom({
+    position: 'topright' // move buttons
+}).addTo(map);
+    
     // Base map
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap & CartoDB',
