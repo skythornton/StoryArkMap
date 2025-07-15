@@ -241,10 +241,8 @@ const locations = [
             fillOpacity: 0.8
         }).addTo(map);
 
-        marker.bindPopup(`
-    ${interviews.title} <br>
-    <a href="${interviews.link}" target="_blank">Listen here</a>
-`);
+        marker.bindPopup(`<a href="${loc.link}" target="_blank">${loc.title}</a>`);
+    });
 
     });
 
@@ -269,8 +267,11 @@ const locations = [
             })
         }).addTo(map);
 
-        marker.bindPopup(`<a href="${interview.link}" target="_blank">${interview.title}</a>`);
-    });
+        marker.bindPopup(`
+    ${interviews.title} <br>
+    <a href="${interviews.link}" target="_blank">Listen here</a>
+`);
+
 </script>
 
 </body>
