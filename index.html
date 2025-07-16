@@ -124,6 +124,9 @@
         h5 {
             font-size: 15px;
         }
+        h6 {
+            font-size: 15px;
+        }
         
     </style>
 </head>
@@ -321,7 +324,7 @@ const locations = [
     }).addTo(map);
 
     marker.bindPopup(`
-        <h4>${loc.heading}</h4>
+        <h6>${loc.heading}</h6>
         <p>${loc.description}</p>
         <a href="${loc.link}" target="_blank">Read more</a>
     `);
