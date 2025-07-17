@@ -4,41 +4,43 @@
     <title>Story Ark Map</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
-   <link href="https://fonts.googleapis.com/css2?family=Trocchi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Trocchi&display=swap" rel="stylesheet">
 
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Lora', serif;
+        }
+
         #map {
-            height: 90vh;
+            height: calc(100vh - 180px);
             width: 100%;
         }
 
-        body {
-            font-family: 'Lora', serif;
-            margin: 0;
-            padding: 0;
-        }
-        
         h1 {
-            letter-spacing: 0.03em; 
-             font-weight: 400;  
-            margin-bottom: 4px;
-            margin-top: 30px;
-        }
-        
-        h4 {
-            font-family: 'Lora', serif;
             text-align: center;
-            margin-top: -10px;
+            white-space: pre-wrap;
+            font-family: 'Trocchi', serif;
+            letter-spacing: 0.03em;
+            font-weight: 400;
+            margin: 20px 0 4px 0;
+            font-size: 30px;
+        }
+
+        h4 {
+            text-align: center;
             color: #555;
             font-weight: normal;
+            margin-top: -10px;
         }
-        
-        #legend {
-            font-family: 'Lora', serif; 
+
+        #legend, .interview-legend {
+            font-family: 'Lora', serif;
             background: #F5F5F5;
             padding: 10px;
             line-height: 1.5em;
@@ -46,44 +48,24 @@
             border-radius: 8px;
             box-shadow: 0 0 5px rgba(0,0,0,0.3);
             position: absolute;
-            bottom: 130px;
-            left: 10px;
             z-index: 1000;
             font-size: 14px;
             width: 170px;
         }
 
-        #legend h4 {
-            margin: 0 0 5px;
+        #legend {
+            bottom: 130px;
+            left: 10px;
         }
 
-        #legend span {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-right: 6px;
-            border: 1px solid #555;
-        }
-        
-      .interview-legend {
-            font-family: 'Lora', serif;
-            background: #F5F5F5;
-            padding: 8px;
-            line-height: 1.5em;
-            color: #333;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-            position: absolute;
+        .interview-legend {
             bottom: 60px;
             left: 10px;
-            z-index: 1000;
-            font-size: 14px;
-          width: 170px;
         }
-        
+
         .star-legend {
-        color: #7e481c; 
-        font-size: 14px; 
+            color: #7e481c;
+            font-size: 14px;
         }
 
         footer {
@@ -94,7 +76,6 @@
             padding: 10px;
             color: #777;
             font-size: 13px;
-            font-family: 'Lora', serif;
             background: #fff;
             z-index: 500;
         }
@@ -105,9 +86,9 @@
         }
 
         footer a:hover {
-            color: #5F9E8F; /* soft highlight on hover */
+            color: #5F9E8F;
         }
-        
+
         #logo {
             position: fixed;
             bottom: 50px;
@@ -117,112 +98,129 @@
             z-index: 1100;
             opacity: 0.85;
             transition: opacity 0.3s ease;
-            cursor: pointer; /* shows pointer hand */
+            cursor: pointer;
         }
 
         #logo:hover {
-            opacity: 1; /* fade in on hover */
+            opacity: 1;
         }
-        
+
         .custom-star-icon {
             color: #7e481c;
             font-size: 20px;
             text-align: center;
         }
-        
+
         h5 {
-        font-size: 13px;
-        margin-bottom: 4px;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .leaflet-popup-content {
+            max-width: 250px;
+            word-wrap: break-word;
         }
 
         .leaflet-popup-content p {
-        margin-top: 2px; /* reduce spacing above paragraph */
-        margin-bottom: 0; /* remove extra space below paragraph */
+            margin-top: 2px;
+            margin-bottom: 0;
         }
-    
+
         h6 {
             font-size: 13px;
             margin-bottom: 4px;
         }
-        
+
+        /* ---------- Mobile Optimization ---------- */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 22px;
+                margin-top: 10px;
+            }
+
+            p {
+                font-size: 14px;
+                margin-top: 0;
+            }
+
+            #legend, .interview-legend {
+                width: 140px;
+                font-size: 12px;
+                padding: 6px;
+                line-height: 1.3em;
+            }
+
+            #logo {
+                width: 100px;
+                bottom: 40px;
+            }
+
+            footer {
+                font-size: 11px;
+                padding: 6px;
+            }
+
+            .leaflet-popup-content {
+                max-width: 200px;
+                font-size: 13px;
+            }
+        }
     </style>
-    </head>
+</head>
 
-    <body>
-   
-    
-    <h1 style="
-    text-align: center;
-    white-space: pre-wrap;
-    font-family: 'Trocchi', serif;
-    ">STORY ARK
-    </h1>
-    
-<p style="text-align: center; margin-top: 4; font-family: 'Trocchi', serif; font-size:18px; color:gray;"> 
-    tales from Southern Africa’s climate tipping points
-</p>
-    
-<div id="map"></div>
+<body>
+    <h1>STORY ARK</h1>
+    <p style="text-align: center; color: gray; font-family: 'Trocchi', serif; font-size: 18px;">tales from Southern Africa’s climate tipping points</p>
 
-<div id="legend">
-    <h4>Chapters</h4>
-    <p><span style="background-color: #D33A03;"></span> 1 Dust Bowl</p>
-    <p><span style="background-color: #909F43;"></span> 2 Golden Threads</p>
-    <p><span style="background-color: #80673B;"></span> 3 Oil Spill</p>
-    <p><span style="background-color: #B71E23;"></span> 4 Red Alert</p>
-    <p><span style="background-color: #262F6A;"></span> 5 First Responders</p>
-    <p><span style="background-color: #277EC3;"></span> 6 We, the People</p>
-    <p><span style="background-color: #FED219;"></span> 7 The Scribes</p>
-    <p><span style="background-color: #FFA6BA;"></span> 8 Cancer Alley</p>
-    <p><span style="background-color: #F7941D;"></span> 9 The Endlings</p>
-    <p><span style="background-color: #8DCFEC;"></span> 10 Be the Change</p>
-</div> 
+    <div id="map"></div>
+
+    <div id="legend">
+        <h4>Chapters</h4>
+        <p><span style="background-color: #D33A03;"></span> 1 Dust Bowl</p>
+        <p><span style="background-color: #909F43;"></span> 2 Golden Threads</p>
+        <p><span style="background-color: #80673B;"></span> 3 Oil Spill</p>
+        <p><span style="background-color: #B71E23;"></span> 4 Red Alert</p>
+        <p><span style="background-color: #262F6A;"></span> 5 First Responders</p>
+        <p><span style="background-color: #277EC3;"></span> 6 We, the People</p>
+        <p><span style="background-color: #FED219;"></span> 7 The Scribes</p>
+        <p><span style="background-color: #FFA6BA;"></span> 8 Cancer Alley</p>
+        <p><span style="background-color: #F7941D;"></span> 9 The Endlings</p>
+        <p><span style="background-color: #8DCFEC;"></span> 10 Be the Change</p>
+    </div>
 
     <div class="interview-legend">
-    <p><span class="star-legend">★</span> On the Air</p>
-</div>
-    
-<a href="https://www.storyark.co.za/" target="_blank">
-    <img src="logo.png" alt="Logo" id="logo" />
-</a>
-    
-<footer>
-    By <a href="https://www.linkedin.com/in/skylathornton/" target="_blank">Skyla Thornton</a>, 
-    <a href="https://climate.sun.ac.za/" target="_blank">School for Climate Studies, Stellenbosch University</a>.
-</footer>
-    
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <p><span class="star-legend">★</span> On the Air</p>
+    </div>
 
-<script>
-    
-    //<p style="text-align:center; font-size:16px; color:gray;">
-//- click on the icons to reveal the stories and interviews - 
-//</p>
-    
-    const map = L.map('map', {
-    center: [-30.5595, 22.9375],
-    zoom: 6,
-    minZoom: 5,
-    maxZoom: 10,
-    maxBounds: [
-        [-55, 10],
-        [-20, 35]
-    ],
-    maxBoundsViscosity: 0.8,
-    zoomControl: false // turn off default
-});
+    <a href="https://www.storyark.co.za/" target="_blank">
+        <img src="logo.png" alt="Logo" id="logo" />
+    </a>
 
-// Add custom zoom control on top right
-L.control.zoom({
-    position: 'topright' // move buttons
-}).addTo(map);
-    
-    // Base map
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap & CartoDB',
-        maxZoom: 19
-    }).addTo(map);
+    <footer>
+        By <a href="https://www.linkedin.com/in/skylathornton/" target="_blank">Skyla Thornton</a>,
+        <a href="https://climate.sun.ac.za/" target="_blank">School for Climate Studies, Stellenbosch University</a>.
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map('map', {
+            center: [-30.5595, 22.9375],
+            zoom: 6,
+            minZoom: 5,
+            maxZoom: 10,
+            maxBounds: [[-55, 10], [-20, 35]],
+            maxBoundsViscosity: 0.8,
+            zoomControl: false
+        });
+
+        L.control.zoom({ position: 'topright' }).addTo(map);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap & CartoDB',
+            maxZoom: 19
+        }).addTo(map);
 
     // Color mapping for chapters
     function getColor(group) {
