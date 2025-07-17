@@ -67,18 +67,22 @@
             color: #7e481c;
             font-size: 14px;
         }
+        #map {
+    height: calc(100vh - 140px); /* Reduce header+footer space */
+    width: 100%;
+}
 
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            padding: 5px;
-            color: #777;
-            font-size: 13px;
-            background: #fff;
-            z-index: 500;
-        }
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 6px; /* Smaller padding */
+    color: #777;
+    font-size: 12px; /* Smaller text */
+    background: #fff;
+    z-index: 500;
+}
 
         footer a {
             color: #777;
@@ -133,36 +137,35 @@
 
         /* ---------- Mobile Optimization ---------- */
         @media (max-width: 600px) {
-            h1 {
-                font-size: 22px;
-                margin-top: 10px;
-            }
+           @media (max-width: 600px) {
+    #map {
+        height: calc(100vh - 120px); /* more map space on mobile */
+    }
 
-            p {
-                font-size: 14px;
-                margin-top: 0;
-            }
+    footer {
+        font-size: 11px; /* Smaller footer text on mobile */
+        padding: 4px;    /* Tighter footer on mobile */
+    }
 
-            #legend, .interview-legend {
-                width: 140px;
-                font-size: 12px;
-                padding: 6px;
-                line-height: 1.3em;
-            }
+    #legend, .interview-legend {
+        width: 130px;
+        font-size: 11px;
+        padding: 5px;
+    }
 
-            #logo {
-                width: 100px;
-                bottom: 40px;
-            }
+    h1 {
+        font-size: 20px;
+    }
 
-            footer {
-                font-size: 11px;
-                padding: 6px;
-            }
+    p {
+        font-size: 13px;
+    }
 
             .leaflet-popup-content {
                 max-width: 200px;
                 font-size: 13px;
+                @media (max-width: 600px) {
+   
             }
         }
     </style>
