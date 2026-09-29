@@ -258,10 +258,13 @@
 
         L.control.zoom({ position: 'topright' }).addTo(map);
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap & CartoDB',
-            maxZoom: 19
-        }).addTo(map);
+        L.tileLayer(
+    'https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key=cb1_42vs_1_d558b3bef46e60815cc94c59',
+    {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        maxZoom: 19
+    }
+).addTo(map);
 
     // Color mapping for chapters
     function getColor(group) {
